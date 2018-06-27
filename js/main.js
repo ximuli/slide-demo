@@ -1,8 +1,25 @@
-$('.images > img:nth-child(1)').addClass('current')
-$('.images > img:nth-child(2)').addClass('enter')
-$('.images > img:nth-child(3)').addClass('enter')
+let n
+初始化()
 
-let n = 1;
+setInterval( ()=>{
+	makeLeave(getImage(n))
+	  .one('transitionend', (e)=>{
+	  	makeEnter($(e.currentTarget))
+	  })
+	makeCurrent(getImage(n+1))
+	n += 1
+}, 3000)
+
+
+
+
+
+
+//  下面的函数可以不用看
+
+function getImage(n) {
+	return $(`.images > img:nth-child(${x(n)}`)
+}
 
 function x(n) {
 	if ( n > 3) {
@@ -14,15 +31,23 @@ function x(n) {
 	return n //得到一个循环等于 1 2 3的 n
 }
 
-setInterval( ()=>{
-	$(`.images > img:nth-child(${x(n)}`).removeClass('current').addClass('leave')
-	  .one('transitionend', (e)=>{$(e.currentTarget).removeClass('leave').addClass('enter')})
+function 初始化() {
+	n = 1;
+	$(`.images > img:nth-child(${n})`).addClass('current')
+	  .siblings().addClass('enter')
+}
 
-	$(`.images > img:nth-child(${x(n+1)})`).removeClass('enter').addClass('current')
+function makeCurrent($node) {
+	$node.removeClass('enter').addClass('current')
+	return $node
+}
 
-	n += 1
-}, 2000)
+function makeLeave($node) {
+	$node.removeClass('current').addClass('leave')
+	return $node
+}
 
-
-
-
+function makeEnter($node) {
+	$node.removeClass('leave').addClass('enter')
+	return $node
+}
