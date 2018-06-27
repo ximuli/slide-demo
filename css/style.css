@@ -1,0 +1,9 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+.window { width: 400px; height: 300px; margin: 20px auto; overflow: hidden;}
+.images { position: relative; }
+.images > img { vertical-align: top;/* ==> 正常文档流不加此属性，图片会有间隙 */ transition: all .3s; position: absolute;}
+.images > img.current { left: 0; top: 0; z-index: 1;}
+.images > img.leave { left: -100%; top: 0; z-index: 1;}
+.images > img.enter { left: 100%; top: 0; }
+
